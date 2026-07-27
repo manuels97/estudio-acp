@@ -1039,7 +1039,7 @@ p  { font-size: 16px; color: var(--color-text); line-height: 1.8; }
 .footer__legal {
   font-size: 12px;
   color: rgba(255,255,255,.35);
-  max-width: 580px;
+  max-width: 620px;
   line-height: 1.6;
 }
 .footer__copy { font-size: 13px; color: rgba(255,255,255,.45); }

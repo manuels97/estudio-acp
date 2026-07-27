@@ -1,0 +1,11 @@
+# Documentos comerciales / propuestas (no publicar)
+Propuesta_ACP_Estudio.pdf.pdf
+Propuestas acp/
+
+# Tipografia con licencia comercial (no redistribuir)
+assets/the_castle_elizah/
+fonts/
+
+# Sistema
+.DS_Store
+Thumbs.db
