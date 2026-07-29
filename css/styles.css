@@ -234,23 +234,33 @@ p  { font-size: 16px; color: var(--color-text); line-height: 1.8; }
   background: var(--color-white);
 }
 
-/* Logo: solo (ícono) en hero oscuro → letras (completo) al scrollear */
-.header__logo .logo--solo   { display: block; }
-.header__logo .logo--letras { display: none;  }
-
-.header.scrolled .header__logo .logo--solo   { display: none;  }
-.header.scrolled .header__logo .logo--letras { display: block; }
-
-/* Sobre hero oscuro — versión blanca */
-.header:not(.scrolled) .header__logo img {
-  filter: brightness(0) invert(1);
-  mix-blend-mode: normal;
+/* Logo: sobre el hero (header transparente), el texto pasa a blanco y el
+   isologo (balanza/gráfico) se superpone en sus colores originales */
+.header__logo .logo--completo { display: block; }
+.header__logo-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
 }
-
-/* Header blanco — colores reales (idéntico al home scrolleado) */
-.header.scrolled .header__logo img {
-  filter: none;
-  mix-blend-mode: multiply;
+.header__logo-wrap .logo--completo {
+  transition: filter 300ms var(--ease-out);
+}
+.header__logo-wrap .logo--icon-overlay {
+  position: absolute;
+  left: 57.8%;
+  top: 29.96%;
+  width: 8.85%;
+  height: 39.7%;
+  object-fit: fill;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms var(--ease-out);
+}
+.header:not(.scrolled) .header__logo-wrap .logo--completo {
+  filter: brightness(0) invert(1);
+}
+.header:not(.scrolled) .header__logo-wrap .logo--icon-overlay {
+  opacity: 1;
 }
 
 /* Hamburger — blanco sobre hero */
@@ -286,14 +296,8 @@ p  { font-size: 16px; color: var(--color-text); line-height: 1.8; }
   display: flex;
   align-items: center;
 }
-.header__logo .logo--letras {
-  height: auto;
-  max-height: 38px;
-  max-width: 220px;
-  width: auto;
-}
-.header__logo .logo--solo {
-  height: 44px;
+.header__logo .logo--completo {
+  height: 50px;
   width: auto;
 }
 
@@ -540,9 +544,10 @@ p  { font-size: 16px; color: var(--color-text); line-height: 1.8; }
    ============================================================ */
 .hero__logo-watermark {
   position: absolute;
-  right: 4%;
-  top: 8%;
-  width: 220px;
+  left: 50%;
+  top: 28%;
+  transform: translate(-50%, -50%);
+  width: clamp(320px, 40vw, 560px);
   height: auto;
   opacity: .055;
   filter: brightness(0) invert(1);
@@ -817,7 +822,7 @@ p  { font-size: 16px; color: var(--color-text); line-height: 1.8; }
 
 .nosotros__text .section-label { margin-bottom: 12px; }
 .nosotros__text .section-title { margin-bottom: 0; }
-.nosotros__text p { margin-bottom: 16px; }
+.nosotros__text p { margin-bottom: 16px; text-align: justify; }
 
 .nosotros__badges {
   display: flex;
@@ -982,7 +987,7 @@ p  { font-size: 16px; color: var(--color-text); line-height: 1.8; }
 }
 
 .footer__logo {
-  height: 80px;
+  height: 70px;
   width: auto;
   margin-bottom: 20px;
   filter: brightness(0) invert(1);
@@ -1462,6 +1467,7 @@ p  { font-size: 16px; color: var(--color-text); line-height: 1.8; }
 @media (max-width: 600px) {
   :root { --section-py: 56px; --header-h: 68px; }
   .container { padding: 0 20px; }
+  .header__logo .logo--completo { height: 28px; }
   .hero__content { grid-template-columns: 1fr; gap: 36px; padding-bottom: 80px; }
   .hero__title { font-size: clamp(38px, 11vw, 56px); }
   .hero__actions { flex-direction: row; }
